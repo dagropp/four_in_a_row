@@ -1,0 +1,50 @@
+Daniel Gropp
+
+(Created for HUJI course "Intro to CS" - exercise 12 - February, 2019)
+
+===============================================================
+=============       README for FOUR IN A ROW      =============
+===============================================================
+=  Description:  =
+=  A program that plays the game 'FOUR IN A ROW' in OOP and with Graphic User Interface, using Tkinter:
+   The program classes are:
+   *  Game - Creates the Game board and the logic of turns, moving players, winning or declare a tie.
+   *  AI - Creates the Artificial intelligence of the game: automatic choosing of the optimal move if any.
+   *  The following classes creates the game's GUI, using tkinter module. Each class represents a different Game screen:
+      -  Screen     -  Creates the base screen, a blank full screen.
+      -  ScreenMenu -  Creates the Main Menu screen, in which the user chooses between player types (human or AI),
+                       starts the game, or quits.
+      -  ScreenGame -  Creates the Game screen, and runs the game according to the specified settings: Creates GUI for
+                       the user to see the game board, move to the requested column, and let the AI player (if specified)
+                       make its turns. (If only AI players are set, the user can watch the game with a slight delay
+                       between turns, for a natural feel).
+      -  ScreenWin  -  Creates the winning screen, that displays this game's winner and offers additional actions:
+                       Play again with the same players settings and statistics. Go back to Main Menu and reset settings
+                       or Quit game.
+      -  Style      -  Static class that contains GUI design constants (images paths, default fonts, backgrounds, etc.)
+                       and methods for all screen classes that create Tkinter widgets more efficiently
+
+   *  Additional files:
+      -  game_data.py -  Contains all game constants, regarding game structure (num of rows, columns, winning
+                         combination, etc.)
+      -  26 img files -  'ai_1.png', 'ai_1_active.png', 'ai_1_win.png', 'ai_2.png', 'ai_2_active.png', 'ai_2_win.png',
+                         'cell_1.png', 'cell_2.png', 'cell_none.png', 'cell_win.png', 'click_1.png', 'click_2.png',
+                         'click_ai_1.png', 'click_ai_2.png', 'click_empty.png', 'click_tie.png', 'click_win_1.png',
+                         'click_win_2.png', 'player_1.png', 'player_1_active.png', 'player_1_win.png', 'player_2.png',
+                         'player_2_active.png', 'player_2_win.png', 'tie.png', 'title.png'.
+===============================================================
+============           Special Comments:           ============
+===============================================================
+=  AI find_legal_moves principles:  =
+   1.  All optional vacant moves (row, col) are mapped and put in list.
+   2.  Each move is checked for all possible combinations that can happen if disc is put in this position, and what
+       will happen in the next turn if disc is put in this position (will it help the other player win).
+   3.  Each move (and next move) is analysed and gets a score, based on the following factors:
+       -  VERY HIGH SCORE: 3 discs of the same kind and 1 vacant - either win or block win.
+       -  HIGH SCORE: 2 discs of the same kind and 2 vacant - progress in game, or block progression.
+       -  LOW SCORE: 1 discs of the same kind and 3 vacant - if no other moves available, better than random.
+       -  VERY NEGATIVE SCORE: 3 discs of other player and 1 vacant - prevent other player from winning next turn.
+       -  NEGATIVE SCORE: 3 discs of this player and 1 vacant - avoid block in next turn.
+   4.  The move with the best score is chosen. In case no move has any special value, or very short timeout, a random
+       move is chosen.  =
+===============================================================
